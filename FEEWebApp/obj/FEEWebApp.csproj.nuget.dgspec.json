@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\FEEWebApp\\FEEWebApp.csproj": {}
+    "D:\\grad\\FeeProject\\FEEWebApp\\FEEWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Core\\Core.csproj": {
+    "D:\\grad\\FeeProject\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Core\\Core.csproj",
+        "projectUniqueName": "D:\\grad\\FeeProject\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Core\\obj\\",
+        "projectPath": "D:\\grad\\FeeProject\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\ascom\\.nuget\\packages\\",
+        "outputPath": "D:\\grad\\FeeProject\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\badaw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ascom\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,10 +38,41 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Linq.Expressions": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
@@ -58,21 +90,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\FEEWebApp\\FEEWebApp.csproj": {
+    "D:\\grad\\FeeProject\\FEEWebApp\\FEEWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\FEEWebApp\\FEEWebApp.csproj",
+        "projectUniqueName": "D:\\grad\\FeeProject\\FEEWebApp\\FEEWebApp.csproj",
         "projectName": "FEEWebApp",
-        "projectPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\FEEWebApp\\FEEWebApp.csproj",
-        "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\FEEWebApp\\obj\\",
+        "projectPath": "D:\\grad\\FeeProject\\FEEWebApp\\FEEWebApp.csproj",
+        "packagesPath": "C:\\Users\\ascom\\.nuget\\packages\\",
+        "outputPath": "D:\\grad\\FeeProject\\FEEWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\badaw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ascom\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,9 +116,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Infrastructure\\Infrastructure.csproj"
+              "D:\\grad\\FeeProject\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\grad\\FeeProject\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -99,7 +132,20 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.4, )"
@@ -113,6 +159,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Linq.Expressions": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
@@ -133,21 +187,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\grad\\FeeProject\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\grad\\FeeProject\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Infrastructure\\obj\\",
+        "projectPath": "D:\\grad\\FeeProject\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\ascom\\.nuget\\packages\\",
+        "outputPath": "D:\\grad\\FeeProject\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\badaw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ascom\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -159,9 +213,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\badaw\\source\\repos\\FEEWebApp\\Core\\Core.csproj"
+              "D:\\grad\\FeeProject\\Core\\Core.csproj": {
+                "projectPath": "D:\\grad\\FeeProject\\Core\\Core.csproj"
               }
             }
           }
@@ -174,7 +229,20 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Microsoft.Bcl.AsyncInterfaces": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.4, )"
@@ -187,13 +255,25 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.2, )"
+              "version": "[5.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Linq.Expressions": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
@@ -211,7 +291,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
