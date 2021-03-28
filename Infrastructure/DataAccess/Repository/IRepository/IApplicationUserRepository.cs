@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Infrastructure.DataAccess.Repository.IRepository
 {
-    interface IApplicationUserRepository : IRopository<ApplicationUser>
+    public interface IApplicationUserRepository : IRopository<ApplicationUser>
     {
     }
 }

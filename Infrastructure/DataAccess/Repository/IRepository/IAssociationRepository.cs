@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Infrastructure.DataAccess.Repository.IRepository
 {
-    interface IAssociationRepository : IRopository<Association>
+    public interface IAssociationRepository : IRopository<Association>
     {
     }
 }

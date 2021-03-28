@@ -1,3 +1,5 @@
+using Infrastructure.DataAccess.Repository;
+using Infrastructure.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +23,7 @@ namespace FEEWebApp
         {
             services.AddDbContext<Infrastructure.FEEDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+            services.AddScoped<IUniteOfWork, UniteOfWork>();
             services.AddControllersWithViews();
         }
 

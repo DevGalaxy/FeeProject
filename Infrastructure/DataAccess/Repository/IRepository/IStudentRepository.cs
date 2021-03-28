@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Infrastructure.DataAccess.Repository.IRepository
 {
-    interface IStudentRepository : IRopository<Student>
+    public interface IStudentRepository : IRopository<Student>
     {
     }
 }

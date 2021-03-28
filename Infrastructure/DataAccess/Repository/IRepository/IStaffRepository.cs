@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Infrastructure.DataAccess.Repository.IRepository
 {
-    interface IStaffRepository : IRopository<Staff>
+    public interface IStaffRepository : IRopository<Staff>
     {
     }
 }

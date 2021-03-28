@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Infrastructure.DataAccess.Repository.IRepository
 {
-    interface IEventsRepository : IRopository<Events>
+    public interface IEventsRepository : IRopository<Events>
     {
     }
 }
