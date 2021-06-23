@@ -14,6 +14,7 @@ namespace Core.Entites
         public string Description { get; set; }
         public string ImagePath { get; set; }
         public virtual ICollection<NewsSubImages> NewsSubImages { get; set; }
+        public Boolean expired { get; set; }
 
         
     }

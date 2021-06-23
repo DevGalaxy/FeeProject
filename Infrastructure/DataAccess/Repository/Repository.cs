@@ -10,6 +10,7 @@ namespace Infrastructure.DataAccess.Repository
 {
     public class Repository<T> : IRopository<T> where T : class
     {
+        
         protected readonly DbContext context;
         internal DbSet<T> dbset;
         public Repository(DbContext Context)

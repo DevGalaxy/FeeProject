@@ -24,7 +24,7 @@ namespace FEEWebApp
             services.AddDbContext<Infrastructure.FEEDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUniteOfWork, UniteOfWork>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

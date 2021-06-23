@@ -19,3 +19,15 @@ C:\Users\badaw\Source\Repos\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.csproj.
 C:\Users\badaw\Source\Repos\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.dll
 C:\Users\badaw\Source\Repos\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.pdb
 C:\Users\badaw\Source\Repos\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.genruntimeconfig.cache
+D:\grad\FeeProject\Core\bin\Debug\netcoreapp3.1\Core.deps.json
+D:\grad\FeeProject\Core\bin\Debug\netcoreapp3.1\Core.runtimeconfig.json
+D:\grad\FeeProject\Core\bin\Debug\netcoreapp3.1\Core.runtimeconfig.dev.json
+D:\grad\FeeProject\Core\bin\Debug\netcoreapp3.1\Core.dll
+D:\grad\FeeProject\Core\bin\Debug\netcoreapp3.1\Core.pdb
+D:\grad\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.csprojAssemblyReference.cache
+D:\grad\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfoInputs.cache
+D:\grad\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
+D:\grad\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache
+D:\grad\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.dll
+D:\grad\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.pdb
+D:\grad\FeeProject\Core\obj\Debug\netcoreapp3.1\Core.genruntimeconfig.cache
