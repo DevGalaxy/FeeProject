@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Web.Mvc;
+
 
 namespace Infrastructure.DataAccess.Repository.IRepository
 {
@@ -22,5 +21,6 @@ namespace Infrastructure.DataAccess.Repository.IRepository
         void Add(T entity);
         void Remove(int id);
         void Remove(T entity);
+        void Update(T entity);
     }
 }

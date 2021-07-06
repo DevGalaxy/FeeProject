@@ -1,0 +1,15 @@
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.deps.json
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.runtimeconfig.json
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.runtimeconfig.dev.json
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\bin\Release\netcoreapp3.1\Infrastructure.pdb
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\bin\Release\netcoreapp3.1\Core.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\bin\Release\netcoreapp3.1\Core.pdb
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.csprojAssemblyReference.cache
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.AssemblyInfo.cs
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.csproj.CopyComplete
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.pdb
+C:\Users\badaw\source\repos\FeeProjectGit_23_\Infrastructure\obj\Release\netcoreapp3.1\Infrastructure.genruntimeconfig.cache

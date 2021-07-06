@@ -22,6 +22,7 @@ namespace Infrastructure.DataAccess.Repository
 
         public void Add(T entity)
         {
+            entity.GetType().GetProperty("CreatedAt").SetValue(entity, DateTime.UtcNow);
             dbset.Add(entity);
         }
 
@@ -76,6 +77,19 @@ namespace Infrastructure.DataAccess.Repository
         {
             T formDB = dbset.Find(id);
             Remove(formDB);
+        }
+
+        public void Update(T entity)
+        {
+            var contextEntity = context.Entry<T>(entity);
+            if (contextEntity != null)
+            {
+                if (contextEntity.State == EntityState.Detached)
+                {
+                    context.Attach(entity);
+                }
+                contextEntity.State = EntityState.Modified;
+            }
         }
 
     }

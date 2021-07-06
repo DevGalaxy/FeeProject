@@ -24,7 +24,16 @@ namespace FEEWebApp
             services.AddDbContext<Infrastructure.FEEDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUniteOfWork, UniteOfWork>();
-            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
+            services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<IAssociationRepository, AssociationRepository>();
+            services.AddScoped<IMainBarRepository, MainBarRepository>();
+            services.AddScoped<IEventsRepository,EventsRepository>();
+            services.AddScoped<IStaffRepository, StaffRepository>();
+           
+            services.AddSwaggerGen();
+
+
+            services.AddControllersWithViews().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +47,21 @@ namespace FEEWebApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCors(x => x.SetIsOriginAllowed(_ => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FEE API");
+            });
+
             app.UseStaticFiles();
 
             app.UseRouting();

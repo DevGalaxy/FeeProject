@@ -1,25 +1,37 @@
-﻿using Infrastructure.DataAccess.Repository.IRepository;
+﻿using Core.Entites;
+using Infrastructure.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FEEWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NewsController : ControllerBase
+    public class MainBarController : BaseController<IMainBarRepository, MainBar>
     {
-        private readonly IUniteOfWork _unitOfWork;
-        public NewsController(IUniteOfWork uniteOfWork)
+        private readonly IMainBarRepository mainBarRepository;
+        private readonly IUniteOfWork _uniteOfWork;
+
+        public MainBarController(IUniteOfWork uniteOfWork, IMainBarRepository mainBarRepository)
+            : base(mainBarRepository, uniteOfWork)
         {
-            this._unitOfWork = uniteOfWork;
+            
+            _uniteOfWork = uniteOfWork;
+            this.mainBarRepository = mainBarRepository;
         }
+    } 
 
-        [HttpGet]
-        public JsonResult GetAll()
+    [Route("api/[controller]")]
+    [ApiController]
+    public class NewsController : BaseController<INewsRepository, News>
+    {
+        private readonly INewsRepository _newsRepository;
+        private readonly IUniteOfWork _uniteOfWork;
+
+        public NewsController(INewsRepository newsRepository, IUniteOfWork uniteOfWork)
+            : base(newsRepository, uniteOfWork)
         {
-            return new JsonResult(new { data = _unitOfWork.news.GetAll() });
+            _newsRepository = newsRepository;
+            _uniteOfWork = uniteOfWork;
         }
-
-
-
     }
 }
