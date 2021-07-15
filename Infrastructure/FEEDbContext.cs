@@ -21,6 +21,7 @@ namespace Infrastructure
         public DbSet<StaffSubjects> StaffSubjects { get; set; }
         public DbSet<Student> students { get; set; }
         public DbSet<StudentSubject> studentSubjects { get; set; }
+        public DbSet<SubjectDepedance> subjectDepedances { get; set; }
         public DbSet<Subject> Subjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

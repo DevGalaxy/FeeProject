@@ -464,7 +464,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DependID");
 
-                    b.ToTable("SubjectDepedance");
+                    b.ToTable("subjectDepedances");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

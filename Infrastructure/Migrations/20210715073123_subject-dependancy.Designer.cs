@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(FEEDbContext))]
-    [Migration("20210715054046_subject-dependancy")]
+    [Migration("20210715073123_subject-dependancy")]
     partial class subjectdependancy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -466,7 +466,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DependID");
 
-                    b.ToTable("SubjectDepedance");
+                    b.ToTable("subjectDepedances");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

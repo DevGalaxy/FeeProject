@@ -7,7 +7,7 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "SubjectDepedance",
+                name: "subjectDepedances",
                 columns: table => new
                 {
                     SubjectID = table.Column<int>(type: "int", nullable: false),
@@ -15,31 +15,31 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubjectDepedance", x => new { x.SubjectID, x.DependID });
+                    table.PrimaryKey("PK_subjectDepedances", x => new { x.SubjectID, x.DependID });
                     table.ForeignKey(
-                        name: "FK_SubjectDepedance_Subjects_DependID",
+                        name: "FK_subjectDepedances_Subjects_DependID",
                         column: x => x.DependID,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_SubjectDepedance_Subjects_SubjectID",
+                        name: "FK_subjectDepedances_Subjects_SubjectID",
                         column: x => x.SubjectID,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectDepedance_DependID",
-                table: "SubjectDepedance",
+                name: "IX_subjectDepedances_DependID",
+                table: "subjectDepedances",
                 column: "DependID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SubjectDepedance");
+                name: "subjectDepedances");
         }
     }
 }
