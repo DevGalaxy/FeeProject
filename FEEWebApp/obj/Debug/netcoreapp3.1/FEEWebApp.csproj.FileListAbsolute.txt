@@ -202,12 +202,6 @@ D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\FEEWebApp.pdb
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\FEEWebApp.Views.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\FEEWebApp.Views.pdb
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Humanizer.dll
-D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
-D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
-D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
-D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
-D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
-D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -248,7 +242,6 @@ D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Log
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
-D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
@@ -274,7 +267,6 @@ D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Core.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Infrastructure.dll
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Infrastructure.pdb
 D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Core.pdb
-D:\grad\FeeProject\FEEWebApp\obj\Debug\netcoreapp3.1\FEEWebApp.csprojAssemblyReference.cache
 D:\grad\FeeProject\FEEWebApp\obj\Debug\netcoreapp3.1\FEEWebApp.AssemblyInfoInputs.cache
 D:\grad\FeeProject\FEEWebApp\obj\Debug\netcoreapp3.1\FEEWebApp.AssemblyInfo.cs
 D:\grad\FeeProject\FEEWebApp\obj\Debug\netcoreapp3.1\FEEWebApp.csproj.CoreCompileInputs.cache
@@ -404,3 +396,9 @@ C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\bin\Debug\netcoreapp3.1\
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\grad\FeeProject\FEEWebApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\grad\FeeProject\FEEWebApp\obj\Debug\netcoreapp3.1\FEEWebApp.csproj.AssemblyReference.cache

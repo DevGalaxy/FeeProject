@@ -9634,24 +9634,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\badaw\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\ascom\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "D:\\grad\\FeeProject\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\obj\\",
+      "projectPath": "D:\\grad\\FeeProject\\Infrastructure\\Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\ascom\\.nuget\\packages\\",
+      "outputPath": "D:\\grad\\FeeProject\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\badaw\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\ascom\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9659,15 +9654,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://pkgs.dev.azure.com/TravelerClub/_packaging/TravelerClub/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj"
+            "D:\\grad\\FeeProject\\Core\\Core.csproj": {
+              "projectPath": "D:\\grad\\FeeProject\\Core\\Core.csproj"
             }
           }
         }
@@ -9738,7 +9732,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

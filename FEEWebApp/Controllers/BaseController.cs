@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.IRepository;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure.DataAccess.Repository.IRepository;
 namespace FEEWebApp.Controllers
 {
     public class BaseController<Repo, Entity> :
-        ControllerBase where Repo : IRopository<Entity> where Entity : class
+        ControllerBase where Repo : IRepository<Entity> where Entity : class
     {
         private readonly Repo _repo;
         private readonly IUniteOfWork _uniteOfWork;
@@ -18,19 +15,19 @@ namespace FEEWebApp.Controllers
         }
 
         [HttpGet]
-        public dynamic GetAll()
+        public virtual dynamic GetAll()
         {
             return _repo.GetAll();
         }
 
         [HttpGet("{id}")]
-        public dynamic Get(int id)
+        public virtual dynamic Get(int id)
         {
             return _repo.Get(id);
         }
 
         [HttpPost]
-        public dynamic Post(Entity entity)
+        public virtual dynamic Post(Entity entity)
         {
             try
             {
@@ -45,7 +42,7 @@ namespace FEEWebApp.Controllers
         }
 
         [HttpPut]
-        public dynamic Put(Entity entity)
+        public virtual dynamic Put(Entity entity)
         {
             try
             {

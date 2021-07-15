@@ -1,5 +1,5 @@
-using Infrastructure.DataAccess.Repository;
-using Infrastructure.DataAccess.Repository.IRepository;
+using Core.IRepository;
+using Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +27,9 @@ namespace FEEWebApp
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<IAssociationRepository, AssociationRepository>();
             services.AddScoped<IMainBarRepository, MainBarRepository>();
-            services.AddScoped<IEventsRepository,EventsRepository>();
+            services.AddScoped<IEventsRepository, EventsRepository>();
             services.AddScoped<IStaffRepository, StaffRepository>();
-           
+
             services.AddSwaggerGen();
 
 

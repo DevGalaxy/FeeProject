@@ -2,7 +2,7 @@
 
 namespace Core.Entites
 {
-    public class ApplicationUser:IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public string Image { get; set; }
     }

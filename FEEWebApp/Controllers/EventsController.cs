@@ -1,5 +1,5 @@
 ﻿using Core.Entites;
-using Infrastructure.DataAccess.Repository.IRepository;
+using Core.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FEEWebApp.Controllers

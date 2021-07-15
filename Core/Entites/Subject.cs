@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Core.Entites
 {
@@ -9,10 +7,25 @@ namespace Core.Entites
         public Subject()
         {
             StaffSubjects = new HashSet<StaffSubjects>();
+            StudentSubjects = new HashSet<StudentSubject>();
+            DependentOn = new HashSet<SubjectDepedance>();
+            DepeondentAt = new HashSet<SubjectDepedance>();
         }
         public string Code { get; set; }
         public string Name { get; set; }
-        public int TotalHours { get; set; }
+        public int numOfHours { get; set; }
+        public int maxDegree { get; set; }
+        public int minDegree { get; set; }
+        public string content { get; set; }
+
+        // the relations members
+        public int DepartmentID { get; set; }
+        public Department department { get; set; }
         public virtual ICollection<StaffSubjects> StaffSubjects { get; set; }
+        public virtual ICollection<StudentSubject> StudentSubjects { get; set; }
+        //the subjects that the subject depend on
+        public virtual ICollection<SubjectDepedance> DependentOn { get; set; }
+        // the subjects that depend on the subject
+        public virtual ICollection<SubjectDepedance> DepeondentAt { get; set; }
     }
 }

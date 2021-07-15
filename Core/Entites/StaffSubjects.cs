@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entites
 {
-    public class StaffSubjects:BaseEntity
+    public class StaffSubjects : BaseEntity
     {
+        public int ID { get; set; }
+        public int AcadimicYear { get; set; }
+        public string location { get; set; }
+        public SessionType sessionType { get; set; }
+        public string StartAt { get; set; }
+        public string EndAt { get; set; }
+
         public int SubjectId { get; set; }
-
-        [ForeignKey(nameof(SubjectId))]
+        
         public Subject subject { get; set; }
-        public int StaffId { get; set; }
 
-        [ForeignKey(nameof(StaffId))]
+        public int StaffId { get; set; }
+        
         public Staff Staff { get; set; }
-        public int Year { get; set; }
+
     }
+    public enum SessionType { lecture, section, lap }
 }
