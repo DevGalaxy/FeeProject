@@ -4,7 +4,7 @@ namespace Core.Entites
 {
     public class StaffSubjects : BaseEntity
     {
-        public int ID { get; set; }
+
         public int AcadimicYear { get; set; }
         public string location { get; set; }
         public SessionType sessionType { get; set; }
