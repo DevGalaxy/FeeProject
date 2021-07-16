@@ -1,5 +1,5 @@
 ﻿using Core.Entites;
-using Infrastructure.DataAccess.Repository.IRepository;
+using Core.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FEEWebApp.Controllers
@@ -15,9 +15,10 @@ namespace FEEWebApp.Controllers
         public EventsController(IEventsRepository eventsRepository, IUniteOfWork uniteOfWork)
             : base(eventsRepository, uniteOfWork)
         {
-          
+
             _uniteOfWork = uniteOfWork;
             this.eventsRepository = eventsRepository;
         }
+
     }
 }

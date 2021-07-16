@@ -8,9 +8,10 @@ namespace Core.Entites
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        public string CreatedById { get; set; }
+
         [ForeignKey(nameof(CreatedById))]
         public virtual ApplicationUser CreatedUser { get; set; }
 
-        public string CreatedById { get; set; }
     }
 }
