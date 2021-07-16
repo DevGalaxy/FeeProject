@@ -29,7 +29,11 @@ namespace Infrastructure.Repository
         public IEnumerable<StaffSubjects> schedules(int staffid)
         {
             Staff staff = _db.Staff.FirstOrDefault(s => s.Id == staffid);
-            return staff.StaffSubjects.ToList();
+            if (staff != null)
+            {
+                return staff.StaffSubjects.ToList();
+            }
+            return null;
         }
 
         public IEnumerable<Staff> searchByName(string name)
