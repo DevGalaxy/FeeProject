@@ -380,7 +380,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entites.StaffSubjects", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -396,9 +396,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("EndAt")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
@@ -421,7 +418,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("weekDay")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
 
@@ -471,7 +468,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DepartmentID");
 
-                    b.ToTable("students");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Core.Entites.StudentSubject", b =>
@@ -488,17 +485,14 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("degree")
                         .HasColumnType("int");
 
-                    b.Property<int>("maxdegree")
-                        .HasColumnType("int");
-
-                    b.Property<int>("mindegree")
+                    b.Property<int>("state")
                         .HasColumnType("int");
 
                     b.HasKey("studentID", "subjectID");
 
                     b.HasIndex("subjectID");
 
-                    b.ToTable("studentSubjects");
+                    b.ToTable("StudentSubjects");
                 });
 
             modelBuilder.Entity("Core.Entites.Subject", b =>
@@ -508,7 +502,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Code")
+                    b.Property<string>("CodeAR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodeEN")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -559,7 +556,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DependID");
 
-                    b.ToTable("subjectDepedances");
+                    b.ToTable("SubjectDepedances");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

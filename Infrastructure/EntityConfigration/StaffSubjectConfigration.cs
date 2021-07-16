@@ -8,7 +8,7 @@ namespace Infrastructure.EntityConfigration
     {
         public void Configure(EntityTypeBuilder<StaffSubjects> builder)
         {
-            builder.HasKey(ss => ss.ID);
+            builder.HasKey(ss => ss.Id);
         }
     }
 }

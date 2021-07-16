@@ -1,4 +1,5 @@
 ﻿using Core.Entites;
+using Core.Enums;
 using Core.IRepository;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Infrastructure.Repository
 
         public ICollection<Subject> AllSudetedSubjects(int id)
         {
-            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
             if (student != null)
             {
                 List<Subject> subjects = new List<Subject>();
@@ -32,7 +33,7 @@ namespace Infrastructure.Repository
         public ICollection<StudentSubject> Degrees(int id)
         {
 
-            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
             if (student != null)
             {
                 return student.StudentSubjects.Where(s => s.degree != null).ToList();
@@ -44,13 +45,13 @@ namespace Infrastructure.Repository
 
         public ICollection<Subject> DraftSubjects(int id)
         {
-            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
             if (student != null)
             {
                 List<Subject> Draft = new List<Subject>();
                 foreach (StudentSubject subject in student.StudentSubjects)
                 {
-                    if (subject.state == states.draft)
+                    if (subject.state == (int)states.draft)
                     {
                         Draft.Add(subject.subject);
                     }
@@ -62,7 +63,7 @@ namespace Infrastructure.Repository
 
         public ICollection<Subject> EnabledSubjects(int id)
         {
-            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
             if (student != null)
             {
                 List<Subject> studedSubjects = AllSudetedSubjects(id).ToList();
@@ -93,7 +94,7 @@ namespace Infrastructure.Repository
 
         public ICollection<StaffSubjects> schedules(int id)
         {
-            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
             if (student != null)
             {
                 List<Subject> subjects = SutudingSubjects(id).ToList();
@@ -109,12 +110,12 @@ namespace Infrastructure.Repository
 
         public int StudentsNumber()
         {
-            return _db.students.Count();
+            return _db.Students.Count();
         }
 
         public ICollection<Subject> SutudingSubjects(int id)
         {
-            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
             if (student != null)
             {
                 List<Subject> subjects = new List<Subject>();

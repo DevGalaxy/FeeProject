@@ -1,4 +1,5 @@
 ﻿using Core.Entites;
+using Core.Enums;
 using Core.IRepository;
 
 namespace Infrastructure.Repository
@@ -19,12 +20,12 @@ namespace Infrastructure.Repository
             {
                 subject.Enabled = false;
             }
-            var regesteredSubjects = _db.studentSubjects;
+            var regesteredSubjects = _db.StudentSubjects;
             foreach (StudentSubject subject in regesteredSubjects)
             {
-                if (subject.state == states.draft)
+                if (subject.state == (int)states.draft)
                 {
-                    subject.state = states.commit;
+                    subject.state = (int)states.commit;
                 }
             }
         }
