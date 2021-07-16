@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\FEEWebApp",
+    "\\FEEWebApp\\Controllers"
   ],
   "SelectedNode": "\\FEEWebApp.sln",
   "PreviewInSolutionExplorer": false

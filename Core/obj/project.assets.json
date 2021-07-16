@@ -9584,11 +9584,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj",
+      "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\obj\\",
+      "outputPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -9672,7 +9672,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.205\\RuntimeIdentifierGraph.json"
       }
     }
   }

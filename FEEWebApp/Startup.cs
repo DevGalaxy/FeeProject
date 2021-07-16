@@ -49,10 +49,10 @@ namespace FEEWebApp
             }
 
             app.UseCors(x => x.SetIsOriginAllowed(_ => true)
+            .WithOrigins("localhost")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
-
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),

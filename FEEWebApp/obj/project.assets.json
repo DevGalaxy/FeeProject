@@ -9635,11 +9635,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
+      "projectUniqueName": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
       "projectName": "FEEWebApp",
-      "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
+      "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
       "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\FEEWebApp\\obj\\",
+      "outputPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\FEEWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -9661,8 +9661,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -9738,7 +9738,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.205\\RuntimeIdentifierGraph.json"
       }
     }
   }
