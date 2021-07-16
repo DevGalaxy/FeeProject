@@ -15,9 +15,10 @@ namespace FEEWebApp.Controllers
         public EventsController(IEventsRepository eventsRepository, IUniteOfWork uniteOfWork)
             : base(eventsRepository, uniteOfWork)
         {
-          
+
             _uniteOfWork = uniteOfWork;
             this.eventsRepository = eventsRepository;
         }
+
     }
 }

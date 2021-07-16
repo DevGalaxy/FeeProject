@@ -5,6 +5,10 @@ namespace Core.Entites
 {
     public class Student : BaseEntity
     {
+        public Student()
+        {
+            StudentSubjects = new HashSet<StudentSubject>();
+        }
         public string Name { get; set; }
         public string ImagePath { get; set; }
         public string AcademicNumber { get; set; }

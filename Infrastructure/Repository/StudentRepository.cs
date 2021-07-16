@@ -29,25 +29,38 @@ namespace Infrastructure.Repository
             return null;
         }
 
-        public ICollection<Subject> degrees(int id)
+        public ICollection<StudentSubject> Degrees(int id)
         {
 
             Student student = _db.students.SingleOrDefault(s => s.Id == id);
             if (student != null)
             {
-                List<Subject> subjects = new List<Subject>();
-                foreach (StudentSubject item in student.StudentSubjects)
-                {
-                    if (item.degree != null)
-                        subjects.Add(item.subject);
-                }
-                return subjects;
+                return student.StudentSubjects.Where(s => s.degree != null).ToList();
+
             }
             return null;
 
         }
 
-        public ICollection<Subject> enabledsubjects(int id)
+        public ICollection<Subject> DraftSubjects(int id)
+        {
+            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            if (student != null)
+            {
+                List<Subject> Draft = new List<Subject>();
+                foreach (StudentSubject subject in student.StudentSubjects)
+                {
+                    if (subject.state == states.draft)
+                    {
+                        Draft.Add(subject.subject);
+                    }
+                }
+                return Draft;
+            }
+            return null;
+        }
+
+        public ICollection<Subject> EnabledSubjects(int id)
         {
             Student student = _db.students.SingleOrDefault(s => s.Id == id);
             if (student != null)
@@ -57,7 +70,7 @@ namespace Infrastructure.Repository
                 List<Subject> Enabled = new List<Subject>();
                 foreach (Subject subject in AllSubjects)
                 {
-                    if (!studedSubjects.Exists(s => s.Id == subject.Id))
+                    if (!studedSubjects.Exists(s => s.Id == subject.Id) && subject.Enabled == true)
                     {
                         bool prerequest = true;
                         foreach (SubjectDepedance depend in subject.DependentOn)
@@ -75,7 +88,31 @@ namespace Infrastructure.Repository
             return null;
         }
 
-        public ICollection<Subject> sutudingsubjects(int id)
+
+
+
+        public ICollection<StaffSubjects> schedules(int id)
+        {
+            Student student = _db.students.SingleOrDefault(s => s.Id == id);
+            if (student != null)
+            {
+                List<Subject> subjects = SutudingSubjects(id).ToList();
+                List<StaffSubjects> schedul = new List<StaffSubjects>();
+                foreach (Subject subject in subjects)
+                {
+                    schedul.AddRange(subject.StaffSubjects);
+                }
+                return schedul;
+            }
+            return null;
+        }
+
+        public int StudentsNumber()
+        {
+            return _db.students.Count();
+        }
+
+        public ICollection<Subject> SutudingSubjects(int id)
         {
             Student student = _db.students.SingleOrDefault(s => s.Id == id);
             if (student != null)

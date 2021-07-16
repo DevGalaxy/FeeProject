@@ -13,6 +13,7 @@ namespace Infrastructure
         }
         public DbSet<Association> Associations { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<DepartmentReport> DepartmentReports { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<NewsSubImages> NewsSubImages { get; set; }

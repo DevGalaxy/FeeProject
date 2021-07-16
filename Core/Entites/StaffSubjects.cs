@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace Core.Entites
 {
@@ -10,13 +10,15 @@ namespace Core.Entites
         public SessionType sessionType { get; set; }
         public string StartAt { get; set; }
         public string EndAt { get; set; }
+        public string weekDay { get; set; }
+        public DateTime examDay { get; set; }
 
         public int SubjectId { get; set; }
-        
+
         public Subject subject { get; set; }
 
         public int StaffId { get; set; }
-        
+
         public Staff Staff { get; set; }
 
     }

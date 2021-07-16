@@ -11,12 +11,15 @@ namespace Core.Entites
             DependentOn = new HashSet<SubjectDepedance>();
             DepeondentAt = new HashSet<SubjectDepedance>();
         }
-        public string Code { get; set; }
         public string Name { get; set; }
+        public string CodeEN { get; set; }
+        public string CodeAR { get; set; }
         public int numOfHours { get; set; }
         public int maxDegree { get; set; }
         public int minDegree { get; set; }
         public string content { get; set; }
+        public bool Enabled { get; set; }
+
 
         // the relations members
         public int DepartmentID { get; set; }
