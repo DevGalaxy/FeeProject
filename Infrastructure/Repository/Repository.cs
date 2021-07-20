@@ -25,12 +25,12 @@ namespace Infrastructure.Repository
             dbset.Add(entity);
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             return dbset.Find(id);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> OrdredBy = null, string includedPropperties = null)
+        public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> OrdredBy = null, string includedPropperties = null)
         {
             IQueryable<T> query = dbset;
             if (filter != null)

@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FEEWebApp.Controllers
 {
 
-    [Route("api/[controller]")]
-    [ApiController]
     public class EventsController : BaseController<IEventsRepository, Events>
     {
         private readonly IEventsRepository eventsRepository;

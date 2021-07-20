@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "Bbxa86OwsZeuDJeFycW4JjbfEIHNqJ8TDFCMC4GSWvzxZ7z9t1pg5pic00ArIaTVEXZQoyd3XuUbnb6L10V/MQ==",
+  "dgSpecHash": "ibrfExXEm7kC2UOcuEaUswp5U/xrxEa9nPmWzafeET+22B0EJTnNibo49K/iEGFU/5XLX0MNzsoJpKvpAigt9w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
+  "projectFilePath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\badaw\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\badaw\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\badaw\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\badaw\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\badaw\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.17\\microsoft.aspnetcore.authentication.jwtbearer.3.1.17.nupkg.sha512",
     "C:\\Users\\badaw\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "C:\\Users\\badaw\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.2.0\\microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "C:\\Users\\badaw\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",

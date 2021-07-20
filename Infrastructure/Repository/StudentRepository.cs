@@ -1,6 +1,7 @@
 ﻿using Core.Entites;
 using Core.Enums;
 using Core.IRepository;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace Infrastructure.Repository
 
         public ICollection<Subject> AllSudetedSubjects(int id)
         {
-            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.Where(s => s.Id == id).Include(x => x.StudentSubjects).ThenInclude(x=>x.subject).FirstOrDefault();
             if (student != null)
             {
                 List<Subject> subjects = new List<Subject>();
@@ -33,7 +34,7 @@ namespace Infrastructure.Repository
         public ICollection<StudentSubject> Degrees(int id)
         {
 
-            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.Where(s => s.Id == id).Include(x => x.StudentSubjects).FirstOrDefault();
             if (student != null)
             {
                 return student.StudentSubjects.Where(s => s.degree != null).ToList();
@@ -45,7 +46,7 @@ namespace Infrastructure.Repository
 
         public ICollection<Subject> DraftSubjects(int id)
         {
-            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.Where(s => s.Id == id).Include(x => x.StudentSubjects).FirstOrDefault();
             if (student != null)
             {
                 List<Subject> Draft = new List<Subject>();
@@ -63,7 +64,7 @@ namespace Infrastructure.Repository
 
         public ICollection<Subject> EnabledSubjects(int id)
         {
-            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.Where(s => s.Id == id).Include(x => x.StudentSubjects).FirstOrDefault();
             if (student != null)
             {
                 List<Subject> studedSubjects = AllSudetedSubjects(id).ToList();
@@ -89,12 +90,9 @@ namespace Infrastructure.Repository
             return null;
         }
 
-
-
-
         public ICollection<StaffSubjects> schedules(int id)
         {
-            Student student = _db.Students.SingleOrDefault(s => s.Id == id);
+            Student student = _db.Students.Where(s => s.Id == id).Include(x => x.StudentSubjects).FirstOrDefault();
             if (student != null)
             {
                 List<Subject> subjects = SutudingSubjects(id).ToList();

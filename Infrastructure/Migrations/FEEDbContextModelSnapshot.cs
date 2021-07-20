@@ -84,7 +84,7 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Core.Entites.Association", b =>
@@ -141,7 +141,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("HeadSpeech")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MangerID")
+                    b.Property<int?>("MangerID")
                         .HasColumnType("int");
 
                     b.Property<string>("Massage")
@@ -158,7 +158,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("MangerID")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[MangerID] IS NOT NULL");
 
                     b.ToTable("Departments");
                 });
@@ -194,7 +195,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DepartmentID");
 
-                    b.ToTable("DepartmentLab");
+                    b.ToTable("DepartmentLabs");
                 });
 
             modelBuilder.Entity("Core.Entites.DepartmentReport", b =>
@@ -338,6 +339,41 @@ namespace Infrastructure.Migrations
                     b.ToTable("positions");
                 });
 
+            modelBuilder.Entity("Core.Entites.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("JwtId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("Core.Entites.Staff", b =>
                 {
                     b.Property<int>("Id")
@@ -351,7 +387,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("CreatedById")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("DepratnemtID")
+                    b.Property<int?>("DepratnemtID")
                         .HasColumnType("int");
 
                     b.Property<string>("ImagePath")
@@ -363,7 +399,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ScientificDegree")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("positionID")
+                    b.Property<int?>("positionID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -373,7 +409,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DepratnemtID");
 
                     b.HasIndex("positionID")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[positionID] IS NOT NULL");
 
                     b.ToTable("Staff");
                 });
@@ -583,7 +620,7 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -631,7 +668,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("UserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -668,7 +705,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -707,9 +744,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Core.Entites.Staff", "Head")
                         .WithOne("Managed")
-                        .HasForeignKey("Core.Entites.Department", "MangerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Core.Entites.Department", "MangerID");
 
                     b.Navigation("CreatedUser");
 
@@ -788,6 +823,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("CreatedUser");
                 });
 
+            modelBuilder.Entity("Core.Entites.RefreshToken", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Core.Entites.Staff", b =>
                 {
                     b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
@@ -796,15 +840,11 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Core.Entites.Department", "Department")
                         .WithMany("Staffs")
-                        .HasForeignKey("DepratnemtID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepratnemtID");
 
                     b.HasOne("Core.Entites.Position", "position")
                         .WithOne("staff")
-                        .HasForeignKey("Core.Entites.Staff", "positionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Core.Entites.Staff", "positionID");
 
                     b.Navigation("CreatedUser");
 

@@ -55,6 +55,21 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Core.dll": {}
         }
       },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.17": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "5.5.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Authorization/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -3209,6 +3224,21 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Core.xml",
         "microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.authentication.core.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.17": {
+      "sha512": "HUb1PtlvXhT7EXrNm9NRdgwR+Urz6wXWIKUnJukgPUWH1ZlVKtTsYzw1kNBsJXba/UcZ6Fr+1SPFd9syk/2YHg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/3.1.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
+        "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
+        "microsoft.aspnetcore.authentication.jwtbearer.3.1.17.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authorization/2.2.0": {
@@ -9616,6 +9646,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Infrastructure >= 1.0.0",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.17",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.4",
       "Microsoft.AspNetCore.Identity.UI >= 3.1.10",
       "Microsoft.AspNetCore.Mvc >= 2.2.0",
@@ -9635,11 +9666,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
+      "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
       "projectName": "FEEWebApp",
-      "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
+      "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\FEEWebApp\\FEEWebApp.csproj",
       "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\FEEWebApp\\obj\\",
+      "outputPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\FEEWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -9661,8 +9692,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -9677,6 +9708,10 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[3.1.17, )"
+          },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.4, )"

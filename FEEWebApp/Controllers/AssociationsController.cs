@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FEEWebApp.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+  
     public class AssociationsController : BaseController<IAssociationRepository, Association>
     {
         private readonly IAssociationRepository associationRepository;

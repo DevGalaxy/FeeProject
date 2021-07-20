@@ -1,11 +1,19 @@
+using Core.Entites;
 using Core.IRepository;
+using FEEWebApp.Models;
 using Infrastructure.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System;
+using System.Text;
 
 namespace FEEWebApp
 {
@@ -29,8 +37,74 @@ namespace FEEWebApp
             services.AddScoped<IMainBarRepository, MainBarRepository>();
             services.AddScoped<IEventsRepository, EventsRepository>();
             services.AddScoped<IStaffRepository, StaffRepository>();
+            services.AddScoped<IDepartmentLapRepository, DepartmentLabRepository>();
+            services.AddScoped<IDepartmentsRepository, DepartmentsRepository>();
+            services.AddScoped<IPosition, PositonRepository>();
+            services.AddScoped<IStudentSubjectRepository, StudentSubjectRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+            services.AddScoped<IStaffSubjectsRepository, StaffSubjectsRepository>();
+            services.AddScoped<INewsSubImagesRepository, NewsSubImagesRepository>();
+            services.AddScoped<IDepartmentReport, DepartmentReportRepository>();
+            services.AddScoped<ISubjectDepedance, SubjectDependenceRepository>();
 
-            services.AddSwaggerGen();
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
+
+            var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                RequireExpirationTime = false,
+
+                // Allow to use seconds for expiration of token
+                // Required only when token lifetime less than 5 minutes
+                // THIS ONE
+                ClockSkew = TimeSpan.Zero
+            };
+            services.AddSingleton(tokenValidationParameters);
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(jwt =>
+                {
+                    jwt.SaveToken = true;
+                    jwt.TokenValidationParameters = tokenValidationParameters;
+                });
+
+
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //    .AddJwtBearer();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<Infrastructure.FEEDbContext>()
+            .AddDefaultTokenProviders()
+            .AddDefaultUI();
+            services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+            });
 
 
             services.AddControllersWithViews().AddNewtonsoftJson();
@@ -61,11 +135,11 @@ namespace FEEWebApp
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FEE API");
             });
-
+           
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

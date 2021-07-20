@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 namespace FEEWebApp.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class BaseController<Repo, Entity> :
         ControllerBase where Repo : IRepository<Entity> where Entity : class
     {

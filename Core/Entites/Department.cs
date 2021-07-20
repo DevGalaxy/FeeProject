@@ -25,7 +25,7 @@ namespace Core.Entites
         public virtual ICollection<Subject> Subjects { get; set; }
         public virtual ICollection<Staff> Staffs { get; set; }
 
-        public int MangerID { get; set; }
+        public int? MangerID { get; set; }
         public Staff Head { get; set; }
     }
 }
