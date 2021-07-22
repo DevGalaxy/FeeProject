@@ -12,33 +12,51 @@ namespace Infrastructure
         {
 
         }
-        public DbSet<Association> Associations { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentReport> DepartmentReports { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<NewsSubImages> NewsSubImages { get; set; }
-        public DbSet<Position> positions { get; set; }
-        public DbSet<Staff> Staff { get; set; }
         public DbSet<StaffSubjects> StaffSubjects { get; set; }
-        public DbSet<Student> Students { get; set; }
         public DbSet<StudentSubject> StudentSubjects { get; set; }
-        public DbSet<SubjectDepedance>  SubjectDepedances { get; set; }
+        public DbSet<SubjectDepedance> SubjectDepedances { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<DepartmentLab> DepartmentLabs { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<Page>Pages { get; set; }
+        public DbSet<Page> Pages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new DepartmentConfigration());
-            builder.ApplyConfiguration(new staffConfigration());
-            builder.ApplyConfiguration(new StudentSubjectConfigration());
-            builder.ApplyConfiguration(new StaffSubjectConfigration());
             builder.ApplyConfiguration(new SubjectDepedanceConfigration());
-            builder.ApplyConfiguration(new SubjectConfigration());
-            
+
+            builder.Entity<Department>()
+                .HasMany(a => a.Users)
+                .WithOne(b => b.Department);
+            builder.Entity<StaffSubjects>()
+                .HasKey(bc => new { bc.UserId, bc.SubjectId });
+
+            builder.Entity<StaffSubjects>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.StaffSubjects)
+                .HasForeignKey(bc => bc.UserId);
+            builder.Entity<StaffSubjects>()
+                .HasOne(bc => bc.Subject)
+                .WithMany(c => c.StaffSubjects)
+                .HasForeignKey(bc => bc.SubjectId);
+
+            builder.Entity<StudentSubject>()
+                .HasKey(bc => new { bc.UserId, bc.SubjectId });
+
+            builder.Entity<StudentSubject>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.StudentSubjects)
+                .HasForeignKey(bc => bc.UserId);
+            builder.Entity<StudentSubject>()
+                .HasOne(bc => bc.Subject)
+                .WithMany(c => c.StudentSubjects)
+                .HasForeignKey(bc => bc.SubjectId);
+
             base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>()

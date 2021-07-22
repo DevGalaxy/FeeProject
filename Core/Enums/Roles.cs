@@ -6,6 +6,6 @@ namespace Core.Enums
 {
     public enum Roles
     {
-        SuperAdmin,Admin,Basic
+        SuperAdmin,Admin,Staff,Student
     }
 }

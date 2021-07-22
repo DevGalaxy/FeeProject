@@ -1,6 +1,7 @@
 ﻿using Core.Entites;
 using Core.Enums;
 using FEEWebApp.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -37,7 +38,6 @@ namespace FEEWebApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<dynamic> Post(RoleFormViewModel model)
         {
             if (!ModelState.IsValid)

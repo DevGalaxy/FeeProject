@@ -15,9 +15,9 @@ namespace Infrastructure.Seeds
             {
                 await roleManager.CreateAsync(new IdentityRole(Core.Enums.Roles.SuperAdmin.ToString()));
                 await roleManager.CreateAsync(new IdentityRole(Core.Enums.Roles.Admin.ToString()));
-                await roleManager.CreateAsync(new IdentityRole(Core.Enums.Roles.Basic.ToString()));
+                await roleManager.CreateAsync(new IdentityRole(Core.Enums.Roles.Student.ToString()));
+                await roleManager.CreateAsync(new IdentityRole(Core.Enums.Roles.Staff.ToString()));
             }
-       
         }
     }
 }

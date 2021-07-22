@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Entites
 {
@@ -7,8 +8,7 @@ namespace Core.Entites
         public Department()
         {
             Subjects = new HashSet<Subject>();
-            Students = new HashSet<Student>();
-            Staffs = new HashSet<Staff>();
+            Users = new HashSet<ApplicationUser>();
             DepartmentLabs = new HashSet<DepartmentLab>();
             DepartmentReports = new HashSet<DepartmentReport>();
         }
@@ -21,11 +21,9 @@ namespace Core.Entites
 
         public virtual ICollection<DepartmentReport> DepartmentReports { get; set; }
         public virtual ICollection<DepartmentLab> DepartmentLabs { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
         public virtual ICollection<Subject> Subjects { get; set; }
-        public virtual ICollection<Staff> Staffs { get; set; }
+        public string HeadId { get; set; }
 
-        public int? MangerID { get; set; }
-        public Staff Head { get; set; }
     }
 }

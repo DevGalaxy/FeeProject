@@ -37,20 +37,14 @@ namespace FEEWebApp
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUniteOfWork, UniteOfWork>();
             services.AddScoped<INewsRepository, NewsRepository>();
-            services.AddScoped<IAssociationRepository, AssociationRepository>();
             services.AddScoped<IMainBarRepository, MainBarRepository>();
             services.AddScoped<IEventsRepository, EventsRepository>();
-            services.AddScoped<IStaffRepository, StaffRepository>();
             services.AddScoped<IDepartmentLapRepository, DepartmentLabRepository>();
             services.AddScoped<IDepartmentsRepository, DepartmentsRepository>();
-            services.AddScoped<IPosition, PositonRepository>();
-            services.AddScoped<IStudentSubjectRepository, StudentSubjectRepository>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
-            services.AddScoped<IStaffSubjectsRepository, StaffSubjectsRepository>();
             services.AddScoped<INewsSubImagesRepository, NewsSubImagesRepository>();
             services.AddScoped<IDepartmentReport, DepartmentReportRepository>();
             services.AddScoped<ISubjectDepedance, SubjectDependenceRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IPageRepository, PageRepository>();
 
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));

@@ -4,14 +4,16 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(FEEDbContext))]
-    partial class FEEDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210722022746_updateUsers")]
+    partial class updateUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,12 +26,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("About")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AcademicNumber")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -39,9 +35,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DataOfBirth")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
@@ -88,9 +81,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -113,6 +103,38 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Core.Entites.Association", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CoverPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.ToTable("Associations");
+                });
+
             modelBuilder.Entity("Core.Entites.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -132,11 +154,11 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Goals")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HeadId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("HeadSpeech")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MangerID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Massage")
                         .HasColumnType("nvarchar(max)");
@@ -149,7 +171,13 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique()
+                        .HasFilter("[CreatedById] IS NOT NULL");
+
+                    b.HasIndex("MangerID")
+                        .IsUnique()
+                        .HasFilter("[MangerID] IS NOT NULL");
 
                     b.ToTable("Departments");
                 });
@@ -360,6 +388,32 @@ namespace Infrastructure.Migrations
                     b.ToTable("Pages");
                 });
 
+            modelBuilder.Entity("Core.Entites.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Empty")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.ToTable("positions");
+                });
+
             modelBuilder.Entity("Core.Entites.QuickLinks", b =>
                 {
                     b.Property<int>("Id")
@@ -426,32 +480,160 @@ namespace Infrastructure.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
+            modelBuilder.Entity("Core.Entites.Staff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("DepratnemtID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScientificDegree")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("positionID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DepratnemtID");
+
+                    b.HasIndex("positionID")
+                        .IsUnique()
+                        .HasFilter("[positionID] IS NOT NULL");
+
+                    b.ToTable("Staff");
+                });
+
             modelBuilder.Entity("Core.Entites.StaffSubjects", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AcadimicYear")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EndAt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StaffId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StartAt")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "SubjectId");
+                    b.Property<DateTime>("examDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("sessionType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("weekDay")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("StaffId");
 
                     b.HasIndex("SubjectId");
 
                     b.ToTable("StaffSubjects");
                 });
 
-            modelBuilder.Entity("Core.Entites.StudentSubject", b =>
+            modelBuilder.Entity("Core.Entites.Student", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AcademicNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DataOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DepartmentID")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "SubjectId");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("SubjectId");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DepartmentID");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("Core.Entites.StudentSubject", b =>
+                {
+                    b.Property<int>("studentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("subjectID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AcademicYear")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("degree")
+                        .HasColumnType("int");
+
+                    b.Property<int>("state")
+                        .HasColumnType("int");
+
+                    b.HasKey("studentID", "subjectID");
+
+                    b.HasIndex("subjectID");
 
                     b.ToTable("StudentSubjects");
                 });
@@ -513,18 +695,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("DependID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.HasKey("SubjectID", "DependID");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("DependID");
 
@@ -665,19 +836,34 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entites.ApplicationUser", b =>
                 {
                     b.HasOne("Core.Entites.Department", "Department")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("Core.Entites.Department", b =>
+            modelBuilder.Entity("Core.Entites.Association", b =>
                 {
                     b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
                         .WithMany()
                         .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedUser");
+                });
+
+            modelBuilder.Entity("Core.Entites.Department", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithOne()
+                        .HasForeignKey("Core.Entites.Department", "CreatedById");
+
+                    b.HasOne("Core.Entites.Staff", "Head")
+                        .WithOne("Managed")
+                        .HasForeignKey("Core.Entites.Department", "MangerID");
+
+                    b.Navigation("CreatedUser");
+
+                    b.Navigation("Head");
                 });
 
             modelBuilder.Entity("Core.Entites.DepartmentLab", b =>
@@ -769,6 +955,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("MainBar");
                 });
 
+            modelBuilder.Entity("Core.Entites.Position", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.Navigation("CreatedUser");
+                });
+
             modelBuilder.Entity("Core.Entites.QuickLinks", b =>
                 {
                     b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
@@ -793,42 +988,92 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Core.Entites.Staff", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("Core.Entites.Department", "Department")
+                        .WithMany("Staffs")
+                        .HasForeignKey("DepratnemtID");
+
+                    b.HasOne("Core.Entites.Position", "position")
+                        .WithOne("staff")
+                        .HasForeignKey("Core.Entites.Staff", "positionID");
+
+                    b.Navigation("CreatedUser");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("position");
+                });
+
             modelBuilder.Entity("Core.Entites.StaffSubjects", b =>
                 {
-                    b.HasOne("Core.Entites.Subject", "Subject")
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("Core.Entites.Staff", "Staff")
+                        .WithMany("StaffSubjects")
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entites.Subject", "subject")
                         .WithMany("StaffSubjects")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entites.ApplicationUser", "User")
-                        .WithMany("StaffSubjects")
-                        .HasForeignKey("UserId")
+                    b.Navigation("CreatedUser");
+
+                    b.Navigation("Staff");
+
+                    b.Navigation("subject");
+                });
+
+            modelBuilder.Entity("Core.Entites.Student", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("Core.Entites.Department", "department")
+                        .WithMany("Students")
+                        .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Subject");
+                    b.Navigation("ApplicationUser");
 
-                    b.Navigation("User");
+                    b.Navigation("CreatedUser");
+
+                    b.Navigation("department");
                 });
 
             modelBuilder.Entity("Core.Entites.StudentSubject", b =>
                 {
-                    b.HasOne("Core.Entites.Subject", "Subject")
+                    b.HasOne("Core.Entites.Student", "student")
                         .WithMany("StudentSubjects")
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("studentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entites.ApplicationUser", "User")
+                    b.HasOne("Core.Entites.Subject", "subject")
                         .WithMany("StudentSubjects")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("subjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Subject");
+                    b.Navigation("student");
 
-                    b.Navigation("User");
+                    b.Navigation("subject");
                 });
 
             modelBuilder.Entity("Core.Entites.Subject", b =>
@@ -850,10 +1095,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entites.SubjectDepedance", b =>
                 {
-                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
                     b.HasOne("Core.Entites.Subject", "DependOn")
                         .WithMany("DepeondentAt")
                         .HasForeignKey("DependID")
@@ -865,8 +1106,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("SubjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CreatedUser");
 
                     b.Navigation("DependOn");
 
@@ -924,22 +1163,17 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Core.Entites.ApplicationUser", b =>
-                {
-                    b.Navigation("StaffSubjects");
-
-                    b.Navigation("StudentSubjects");
-                });
-
             modelBuilder.Entity("Core.Entites.Department", b =>
                 {
                     b.Navigation("DepartmentLabs");
 
                     b.Navigation("DepartmentReports");
 
-                    b.Navigation("Subjects");
+                    b.Navigation("Staffs");
 
-                    b.Navigation("Users");
+                    b.Navigation("Students");
+
+                    b.Navigation("Subjects");
                 });
 
             modelBuilder.Entity("Core.Entites.News", b =>
@@ -950,6 +1184,23 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entites.Page", b =>
                 {
                     b.Navigation("QuickLinks");
+                });
+
+            modelBuilder.Entity("Core.Entites.Position", b =>
+                {
+                    b.Navigation("staff");
+                });
+
+            modelBuilder.Entity("Core.Entites.Staff", b =>
+                {
+                    b.Navigation("Managed");
+
+                    b.Navigation("StaffSubjects");
+                });
+
+            modelBuilder.Entity("Core.Entites.Student", b =>
+                {
+                    b.Navigation("StudentSubjects");
                 });
 
             modelBuilder.Entity("Core.Entites.Subject", b =>

@@ -1,6 +1,8 @@
 ﻿using Core.Entites;
 using FEEWebApp.Models;
 using Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,22 +27,25 @@ namespace FEEWebApp.Controllers
         private readonly JwtConfig _jwtConfig;
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly FEEDbContext _db;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AuthManagementController(
             UserManager<ApplicationUser> userManager,
             IOptionsMonitor<JwtConfig> optionsMonitor,
             TokenValidationParameters tokenValidationParameters,
-            FEEDbContext db)
+            FEEDbContext db, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _jwtConfig = optionsMonitor.CurrentValue;
             _tokenValidationParameters = tokenValidationParameters;
             _db = db;
+            _roleManager = roleManager;
         }
-      
+
 
         [HttpPost]
         [Route("Register")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequestDto user)
         {
             // Check if the incoming request is valid
@@ -53,23 +59,45 @@ namespace FEEWebApp.Controllers
                     return BadRequest(new RegistrationResponse()
                     {
                         Success = false,
-                        Errors = new List<string>(){
-                                            "Email already exist"
-                                        }
+                        Errors = new List<string>()
+                    {
+                       "Email already exist"
+                    }
                     });
                 }
 
-                var newUser = new ApplicationUser() { Email = user.Email, UserName = user.Email };
+                var newUser = new ApplicationUser()
+                {
+                    Email = user.Email,
+                    UserName = user.Email,
+                    Phone = user.Phone,
+                    Image = user.Image,
+                    ArabicName = user.ArabicName,
+                    EnglishName = user.EnglishName,
+                    DepartmentId = user.DepartmentId,
+                    EmailConfirmed = true,
+                    DataOfBirth= user.DataOfBirth,
+                    AcademicNumber=user.AcademicNumber
+                };
+
                 var isCreated = await _userManager.CreateAsync(newUser, user.Password);
                 if (isCreated.Succeeded)
                 {
-                    var jwtToken =await  GenerateJwtToken(newUser);
+                    var createdUser = await _userManager.FindByIdAsync(newUser.Id);
 
-                    return Ok(new RegistrationResponse()
+                    if (createdUser != null)
                     {
-                        Success = true,
-                        Token = jwtToken.Token
-                    });
+                        var role = _roleManager.Roles.Where(x => x.Id == user.RoleId).FirstOrDefault();
+                        var result = await _userManager.AddToRoleAsync(createdUser, role.Name);
+                        if (result.Succeeded)
+                        {
+                            return Ok(new RegistrationResponse()
+                            {
+                                Success = true,
+                            });
+                        }
+                    }
+
                 }
 
                 return new JsonResult(new RegistrationResponse()
@@ -307,7 +335,7 @@ namespace FEEWebApp.Controllers
                 }
 
                 // Check the token we got if its saved in the db
-                var storedRefreshToken =  _db.RefreshTokens.FirstOrDefault(x => x.Token == tokenRequest.RefreshToken);
+                var storedRefreshToken = _db.RefreshTokens.FirstOrDefault(x => x.Token == tokenRequest.RefreshToken);
 
                 if (storedRefreshToken == null)
                 {
@@ -368,7 +396,7 @@ namespace FEEWebApp.Controllers
                 var dbUser = await _userManager.FindByIdAsync(storedRefreshToken.UserId);
                 return await GenerateJwtToken(dbUser);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

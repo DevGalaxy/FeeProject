@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,7 @@ namespace FEEWebApp.Models
         public string UserName { get; set; }
         public string Email { get; set; }
         public IEnumerable<string> Roles { get; set; }
+        public Department Department { get; set; }
+        public int? DepartmentId { get; set; }
     }
 }

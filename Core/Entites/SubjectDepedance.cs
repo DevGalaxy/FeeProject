@@ -1,6 +1,6 @@
 ﻿namespace Core.Entites
 {
-    public class SubjectDepedance
+    public class SubjectDepedance:BaseEntity
     {
         public int SubjectID { get; set; }
         public int DependID { get; set; }

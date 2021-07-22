@@ -28,7 +28,6 @@ namespace FEEWebApp
                 var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                 await Infrastructure.Seeds.DefaultRoles.SeedASync(roleManager);
-                await Infrastructure.Seeds.DefaultUsers.SeedBasicUserAsync(userManager);
                 await Infrastructure.Seeds.DefaultUsers.SeedSuperAdminUserAsync(userManager,roleManager);
 
                 logger.LogInformation("Data Seeded");

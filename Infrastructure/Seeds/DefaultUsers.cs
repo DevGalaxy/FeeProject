@@ -8,21 +8,6 @@ namespace Infrastructure.Seeds
 {
     public static class DefaultUsers
     {
-        public static async Task SeedBasicUserAsync(UserManager<ApplicationUser> userManager)
-        {
-            var defaultUser = new ApplicationUser
-            {
-                UserName = "user@user.com",
-                Email = "user@user.com",
-                EmailConfirmed = true
-            };
-            var user = await userManager.FindByEmailAsync(defaultUser.Email);
-            if (user == null)
-            {
-                await userManager.CreateAsync(defaultUser, "Aa1234!");
-                await userManager.AddToRoleAsync(defaultUser, Core.Enums.Roles.Basic.ToString());
-            }
-        }
         public static async Task SeedSuperAdminUserAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var defaultUser = new ApplicationUser
@@ -40,7 +25,9 @@ namespace Infrastructure.Seeds
                     {
                         Core.Enums.Roles.SuperAdmin.ToString(),
                         Core.Enums.Roles.Admin.ToString(),
-                        Core.Enums.Roles.Basic.ToString()
+                        Core.Enums.Roles.Staff.ToString(),
+                        Core.Enums.Roles.Student.ToString()
+
                     });
             }
             await roleManager.SeedClaimsForSuperUser();

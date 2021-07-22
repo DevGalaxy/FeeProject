@@ -20,7 +20,6 @@ namespace Core.Entites
         public string content { get; set; }
         public bool Enabled { get; set; }
 
-
         // the relations members
         public int DepartmentID { get; set; }
         public Department department { get; set; }
