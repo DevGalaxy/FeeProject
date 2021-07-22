@@ -1,4 +1,5 @@
 ﻿using Core.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 namespace FEEWebApp.Controllers
@@ -17,12 +18,14 @@ namespace FEEWebApp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public virtual dynamic GetAll()
         {
             return _repo.GetAll();
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public virtual dynamic Get(int id)
         {
             return _repo.Get(id);

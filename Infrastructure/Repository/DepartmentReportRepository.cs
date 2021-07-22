@@ -22,7 +22,8 @@ namespace Infrastructure.Repository
         }
         public override IEnumerable<DepartmentReport> GetAll(Expression<Func<DepartmentReport, bool>> filter = null, Func<IQueryable<DepartmentReport>, IOrderedQueryable<DepartmentReport>> OrdredBy = null, string includedPropperties = null)
         {
-            return _db.DepartmentReports.Include(x => x.department).ToList();
+            var data =  _db.DepartmentReports.Include(x => x.department).ToList();
+            return data;
         }
     }
 }

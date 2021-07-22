@@ -1,8 +1,10 @@
 using Core.Entites;
 using Core.IRepository;
+using FEEWebApp.Filters;
 using FEEWebApp.Models;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -29,7 +31,9 @@ namespace FEEWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Infrastructure.FEEDbContext>(options =>
+            //services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+            //services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+            services.AddDbContextPool<Infrastructure.FEEDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUniteOfWork, UniteOfWork>();
             services.AddScoped<INewsRepository, NewsRepository>();
@@ -46,6 +50,8 @@ namespace FEEWebApp
             services.AddScoped<INewsSubImagesRepository, NewsSubImagesRepository>();
             services.AddScoped<IDepartmentReport, DepartmentReportRepository>();
             services.AddScoped<ISubjectDepedance, SubjectDependenceRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IPageRepository, PageRepository>();
 
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
@@ -106,8 +112,7 @@ namespace FEEWebApp
 
             });
 
-
-            services.AddControllersWithViews().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -135,7 +140,7 @@ namespace FEEWebApp
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FEE API");
             });
-           
+
             app.UseStaticFiles();
 
             app.UseRouting();

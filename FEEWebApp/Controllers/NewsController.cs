@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FEEWebApp.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-
     public class NewsController : BaseController<INewsRepository, News>
     {
         private readonly INewsRepository _newsRepository;

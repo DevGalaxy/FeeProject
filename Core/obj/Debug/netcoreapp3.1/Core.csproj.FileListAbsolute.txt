@@ -36,7 +36,6 @@ C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\bin\Debug\netcoreapp3.1\Core.
 C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\bin\Debug\netcoreapp3.1\Core.runtimeconfig.dev.json
 C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\bin\Debug\netcoreapp3.1\Core.dll
 C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\bin\Debug\netcoreapp3.1\Core.pdb
-C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\obj\Debug\netcoreapp3.1\Core.csprojAssemblyReference.cache
 C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfoInputs.cache
 C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
 C:\Users\badaw\Source\Repos\FeeProjectGit_23_\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache

@@ -1,4 +1,5 @@
 ﻿using Core.Entites;
+using Core.Enums;
 using FEEWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -8,14 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace FEEWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "SuperAdmin")]
-    public class RolesController : Controller
+    public class RolesController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -40,65 +41,72 @@ namespace FEEWebApp.Controllers
         public async Task<dynamic> Post(RoleFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return View("Index", await _roleManager.Roles.ToListAsync());
+                return BadRequest("Role name is required");
 
             if (await _roleManager.RoleExistsAsync(model.Name))
             {
-                return "Role is exists!";
+                return BadRequest("Role is exists!");
             }
 
             await _roleManager.CreateAsync(new IdentityRole(model.Name.Trim()));
 
             return Ok();
         }
+        [HttpGet("ManagePermissions")]
+        public async Task<dynamic> ManagePermissions(string roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId);
 
-        //public async Task<IActionResult> ManagePermissions(string roleId)
-        //{
-        //    var role = await _roleManager.FindByIdAsync(roleId);
+            if (role == null)
+                return BadRequest();
 
-        //    if (role == null)
-        //        return NotFound();
+            var roleClaims = _roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
+            var allClaims = Permissions.GenerateAllPermissions();
+            var allPermissions = allClaims.Select(p => new CheckBoxViewModel { DisplayValue = p }).ToList();
 
-        //    var roleClaims = _roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
-        //    var allClaims = Permissions.GenerateAllPermissions();
-        //    var allPermissions = allClaims.Select(p => new CheckBoxViewModel { DisplayValue = p }).ToList();
+            foreach (var permission in allPermissions)
+            {
+                if (roleClaims.Any(c => c == permission.DisplayValue))
+                    permission.IsSelected = true;
+            }
 
-        //    foreach (var permission in allPermissions)
-        //    {
-        //        if (roleClaims.Any(c => c == permission.DisplayValue))
-        //            permission.IsSelected = true;
-        //    }
+            var viewModel = new PermissionsFormViewModel
+            {
+                RoleId = roleId,
+                RoleName = role.Name,
+                SelectedClaims = allPermissions
+            };
 
-        //    var viewModel = new PermissionsFormViewModel
-        //    {
-        //        RoleId = roleId,
-        //        RoleName = role.Name,
-        //        RoleCalims = allPermissions
-        //    };
+            return viewModel;
+        }
 
-        //    return View(viewModel);
-        //}
+        [HttpPost("ManagePermissions")]
+        public async Task<dynamic> ManagePermissions(PermissionsFormViewModel model)
+        {
+            try
+            {
+                var role = await _roleManager.FindByIdAsync(model.RoleId);
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ManagePermissions(PermissionsFormViewModel model)
-        //{
-        //    var role = await _roleManager.FindByIdAsync(model.RoleId);
+                if (role == null)
+                    return BadRequest();
 
-        //    if (role == null)
-        //        return NotFound();
+                var roleClaims = await _roleManager.GetClaimsAsync(role);
 
-        //    var roleClaims = await _roleManager.GetClaimsAsync(role);
+                foreach (var claim in roleClaims)
+                    await _roleManager.RemoveClaimAsync(role, claim);
 
-        //    foreach (var claim in roleClaims)
-        //        await _roleManager.RemoveClaimAsync(role, claim);
 
-        //    var selectedClaims = model.RoleCalims.Where(c => c.IsSelected).ToList();
+                foreach (var claim in model.UserClaims)
+                    await _roleManager.AddClaimAsync(role, new Claim("Permission", claim));
 
-        //    foreach (var claim in selectedClaims)
-        //        await _roleManager.AddClaimAsync(role, new Claim("Permission", claim.DisplayValue));
+                return true;
+            }
+            catch (Exception ex)
+            {
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+                return ex.Message;
+            }
+            
+        }
     }
 }

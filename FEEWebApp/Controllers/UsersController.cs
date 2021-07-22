@@ -10,7 +10,6 @@ using System.Collections.Generic;
 
 namespace FEEWebApp.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -30,9 +29,19 @@ namespace FEEWebApp.Controllers
         public async Task<List<UserViewModel>> GetUSers()
         {
             var users = await _userManager.Users
-                .Select(user => new UserViewModel { Id = user.Id, UserName = user.UserName, Email = user.Email, Roles = _userManager.GetRolesAsync(user).Result })
+
+                .Select(user => new UserViewModel { Id = user.Id, UserName = user.UserName, Email = user.Email })
                 .ToListAsync();
 
+            users.ForEach(x =>
+            {
+                x.Roles = _userManager.GetRolesAsync(new ApplicationUser
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    Email = x.Email
+                }).Result;
+            });
             return users;
         }
 
@@ -50,7 +59,7 @@ namespace FEEWebApp.Controllers
             {
                 UserId = user.Id,
                 UserName = user.UserName,
-                Roles = roles.Select(role => new CheckBoxViewModel
+                SelectedRoles = roles.Select(role => new CheckBoxViewModel
                 {
                     DisplayValue = role.Name,
                     IsSelected = _userManager.IsInRoleAsync(user, role.Name).Result
@@ -72,7 +81,8 @@ namespace FEEWebApp.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
 
             await _userManager.RemoveFromRolesAsync(user, userRoles);
-            await _userManager.AddToRolesAsync(user, model.Roles.Where(r => r.IsSelected).Select(r => r.DisplayValue));
+            
+            await _userManager.AddToRolesAsync(user, model.UserRoles);
 
             //foreach (var role in model.Roles)
             //{

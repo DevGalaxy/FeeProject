@@ -10,11 +10,21 @@ namespace Core.Enums
         {
             return new List<string>()
             {
-                $"Permissions.{module}.Read",
-                $"Permissions.{module}.Create",
-                $"Permissions.{module}.Update",
+                $"Permissions.{module}.Get",
+                $"Permissions.{module}.Post",
+                $"Permissions.{module}.Put",
                 $"Permissions.{module}.Delete"
             };
+        }
+        public static List<string> GenerateAllPermissions()
+        {
+            var allPermissions = new List<string>();
+            var modules = Enum.GetValues(typeof(Modules));
+            foreach (var item in modules)
+            {
+                allPermissions.AddRange(GeneratePermissions(item.ToString()));
+            }
+            return allPermissions;
         }
     }
 }

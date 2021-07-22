@@ -27,6 +27,7 @@ namespace Infrastructure
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<DepartmentLab> DepartmentLabs { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Page>Pages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

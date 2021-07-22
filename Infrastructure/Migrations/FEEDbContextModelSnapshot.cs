@@ -27,9 +27,15 @@ namespace Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("ArabicName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -37,6 +43,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -58,11 +67,17 @@ namespace Infrastructure.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -75,6 +90,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -155,7 +172,9 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique()
+                        .HasFilter("[CreatedById] IS NOT NULL");
 
                     b.HasIndex("MangerID")
                         .IsUnique()
@@ -261,6 +280,29 @@ namespace Infrastructure.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Core.Entites.MainBar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.ToTable("MainBar");
+                });
+
             modelBuilder.Entity("Core.Entites.News", b =>
                 {
                     b.Property<int>("Id")
@@ -313,6 +355,40 @@ namespace Infrastructure.Migrations
                     b.ToTable("NewsSubImages");
                 });
 
+            modelBuilder.Entity("Core.Entites.Page", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MainBarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("MainBarId");
+
+                    b.ToTable("Pages");
+                });
+
             modelBuilder.Entity("Core.Entites.Position", b =>
                 {
                     b.Property<int>("Id")
@@ -337,6 +413,37 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("positions");
+                });
+
+            modelBuilder.Entity("Core.Entites.QuickLinks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("PageId");
+
+                    b.ToTable("QuickLinks");
                 });
 
             modelBuilder.Entity("Core.Entites.RefreshToken", b =>
@@ -727,6 +834,15 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Core.Entites.ApplicationUser", b =>
+                {
+                    b.HasOne("Core.Entites.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("Core.Entites.Association", b =>
                 {
                     b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
@@ -739,8 +855,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entites.Department", b =>
                 {
                     b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
+                        .WithOne()
+                        .HasForeignKey("Core.Entites.Department", "CreatedById");
 
                     b.HasOne("Core.Entites.Staff", "Head")
                         .WithOne("Managed")
@@ -794,6 +910,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("CreatedUser");
                 });
 
+            modelBuilder.Entity("Core.Entites.MainBar", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.Navigation("CreatedUser");
+                });
+
             modelBuilder.Entity("Core.Entites.News", b =>
                 {
                     b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
@@ -814,11 +939,43 @@ namespace Infrastructure.Migrations
                     b.Navigation("News");
                 });
 
+            modelBuilder.Entity("Core.Entites.Page", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("Core.Entites.MainBar", "MainBar")
+                        .WithMany()
+                        .HasForeignKey("MainBarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedUser");
+
+                    b.Navigation("MainBar");
+                });
+
             modelBuilder.Entity("Core.Entites.Position", b =>
                 {
                     b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
                         .WithMany()
                         .HasForeignKey("CreatedById");
+
+                    b.Navigation("CreatedUser");
+                });
+
+            modelBuilder.Entity("Core.Entites.QuickLinks", b =>
+                {
+                    b.HasOne("Core.Entites.ApplicationUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("Core.Entites.Page", null)
+                        .WithMany("QuickLinks")
+                        .HasForeignKey("PageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CreatedUser");
                 });
@@ -1023,6 +1180,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entites.News", b =>
                 {
                     b.Navigation("NewsSubImages");
+                });
+
+            modelBuilder.Entity("Core.Entites.Page", b =>
+                {
+                    b.Navigation("QuickLinks");
                 });
 
             modelBuilder.Entity("Core.Entites.Position", b =>
