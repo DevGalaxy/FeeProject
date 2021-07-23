@@ -3,8 +3,6 @@
     public enum Modules
     {
         News,
-        Events,
-        Roles,
-        Users
+        Events
     }
 }

@@ -24,7 +24,9 @@ namespace Infrastructure
         public DbSet<DepartmentLab> DepartmentLabs { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Page> Pages { get; set; }
-
+        public DbSet<ContactUs> ContactUs { get; set; }
+        public DbSet<ContactUsEmail> ContactUsEmail { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -76,9 +76,14 @@ namespace FEEWebApp.Controllers
                     EnglishName = user.EnglishName,
                     DepartmentId = user.DepartmentId,
                     EmailConfirmed = true,
-                    DataOfBirth= user.DataOfBirth,
-                    AcademicNumber=user.AcademicNumber
+                    DataOfBirth = user.DataOfBirth,
+                    AcademicNumber = user.AcademicNumber
                 };
+                var role = _roleManager.Roles.Where(x => x.Id == user.RoleId).FirstOrDefault();
+                if (role.Name.Trim() == Core.Enums.Roles.Student.ToString())
+                    user.Title = "طالب";
+                if (role.Name.Trim() == Core.Enums.Roles.Staff.ToString())
+                    user.Title = "أعضاء هيئة التدريس";
 
                 var isCreated = await _userManager.CreateAsync(newUser, user.Password);
                 if (isCreated.Succeeded)
@@ -87,8 +92,10 @@ namespace FEEWebApp.Controllers
 
                     if (createdUser != null)
                     {
-                        var role = _roleManager.Roles.Where(x => x.Id == user.RoleId).FirstOrDefault();
                         var result = await _userManager.AddToRoleAsync(createdUser, role.Name);
+                      
+                        await _userManager.UpdateAsync(createdUser);
+
                         if (result.Succeeded)
                         {
                             return Ok(new RegistrationResponse()
@@ -159,21 +166,29 @@ namespace FEEWebApp.Controllers
         #endregion
 
 
-        private async Task<AuthResult> GenerateJwtToken(IdentityUser user)
+        private async Task<AuthResult> GenerateJwtToken(IdentityUser user, List<string> roles)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
             var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
 
+            var claims = new List<Claim>()
+                {
+                 new Claim("Id", user.Id),
+                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+            roles.ForEach(role =>
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            });
+
+            var claimsIdentity = new ClaimsIdentity(claims);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-            new Claim("Id", user.Id),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        }),
+                Subject = claimsIdentity,
                 Expires = DateTime.UtcNow.AddHours(6),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -187,7 +202,7 @@ namespace FEEWebApp.Controllers
                 IsUsed = false,
                 UserId = user.Id,
                 AddedDate = DateTime.UtcNow,
-                ExpiryDate = DateTime.UtcNow.AddYears(1),
+                ExpiryDate = DateTime.UtcNow.AddDays(1),
                 IsRevoked = false,
                 Token = RandomString(25) + Guid.NewGuid()
             };
@@ -237,7 +252,9 @@ namespace FEEWebApp.Controllers
 
                 if (isCorrect)
                 {
-                    var jwtToken = await GenerateJwtToken(existingUser);
+                    var userRoles = await _userManager.GetRolesAsync(existingUser);
+
+                    var jwtToken = await GenerateJwtToken(existingUser, userRoles.ToList());
 
                     return Ok(new RegistrationResponse()
                     {
@@ -394,7 +411,9 @@ namespace FEEWebApp.Controllers
                 await _db.SaveChangesAsync();
 
                 var dbUser = await _userManager.FindByIdAsync(storedRefreshToken.UserId);
-                return await GenerateJwtToken(dbUser);
+                var userRoles = await _userManager.GetRolesAsync(dbUser);
+
+                return await GenerateJwtToken(dbUser, userRoles.ToList());
             }
             catch
             {

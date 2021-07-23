@@ -10,13 +10,14 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Infrastructure;
 using Core.Enums;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace FEEWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class UsersController : ControllerBase
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdmin")]
+    public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -48,6 +49,16 @@ namespace FEEWebApp.Controllers
                 x.Department = _db.Departments.Where(d => d.Id == x.DepartmentId).FirstOrDefault();
             });
             return users;
+        }
+
+        [HttpGet("GetUsersByRoleId/{id}")]
+        public List<UserViewModel> GetUsersByRoleId(string id)
+        {
+            var role = _roleManager.Roles.Where(x => x.Id == id).FirstOrDefault();
+            if (role != null)
+                return FilterData(role.Name);
+            else
+                return new List<UserViewModel>();
         }
 
         [HttpGet("GetStaff")]
@@ -86,13 +97,19 @@ namespace FEEWebApp.Controllers
 
             users.ForEach(x =>
             {
+                x.Roles = x.Roles = _userManager.GetRolesAsync(new ApplicationUser
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    Email = x.Email
+                }).Result;
                 x.Department = _db.Departments.Where(d => d.Id == x.DepartmentId).FirstOrDefault();
             });
             return users;
         }
         #endregion
 
-        [HttpGet("{id}/GetSpecifcUser")]
+        [HttpGet("GetSpecifcUser/{id}")]
         public async Task<UserViewModel> GetSpecifcUser(string id)
         {
             var user = await _userManager.Users
@@ -112,6 +129,58 @@ namespace FEEWebApp.Controllers
             }
             return user;
         }
+
+        [HttpGet("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserRegistrationRequestDto user)
+        {
+            // Check if the incoming request is valid
+            if (ModelState.IsValid)
+            {
+                // check i the user with the same email exist
+                var existingUser = await _userManager.FindByEmailAsync(user.Email);
+
+                if (existingUser != null)
+                {
+                    existingUser.Phone = user.Phone;
+                    existingUser.Image = user.Image;
+                    existingUser.ArabicName = user.ArabicName;
+                    existingUser.EnglishName = user.EnglishName;
+                    existingUser.DepartmentId = user.DepartmentId;
+                    existingUser.EmailConfirmed = true;
+                    existingUser.DataOfBirth = user.DataOfBirth;
+                    existingUser.AcademicNumber = user.AcademicNumber;
+                }
+
+
+                var isUpdated = await _userManager.UpdateAsync(existingUser);
+                if (isUpdated.Succeeded)
+                {
+                    return Ok(new RegistrationResponse()
+                    {
+                        Success = true,
+                    });
+
+                }
+
+                return new JsonResult(new RegistrationResponse()
+                {
+                    Success = false,
+                    Errors = isUpdated.Errors.Select(x => x.Description).ToList()
+                }
+                        )
+                { StatusCode = 500 };
+            }
+
+            return BadRequest(new RegistrationResponse()
+            {
+                Success = false,
+                Errors = new List<string>(){
+                                            "Invalid data"
+                                        }
+            });
+        }
+
+
         [HttpGet("ManageRoles")]
         public async Task<dynamic> ManageRoles(string userId)
         {
@@ -160,6 +229,20 @@ namespace FEEWebApp.Controllers
             //}
 
             return Ok();
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var currentAction = context.RouteData.Values["action"].ToString();
+                var currentController = context.RouteData.Values["controller"].ToString();
+                if (!HttpContext.User.Claims.Any(x => x.Type == "Permission" && x.Value == $"Permission.{currentController}.{currentAction}"))
+                {
+                    context.HttpContext.Response.StatusCode = 401;
+                    context.Result = Unauthorized();
+                }
+            }
         }
     }
 }

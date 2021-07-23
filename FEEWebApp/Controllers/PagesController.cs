@@ -18,16 +18,18 @@ namespace FEEWebApp.Controllers
         private readonly IPageRepository _pageRepository;
         private readonly IUniteOfWork _uniteOfWork;
         private readonly FEEDbContext _db;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PagesController(IUniteOfWork uniteOfWork, IPageRepository pageRepository, FEEDbContext db)
-            : base(pageRepository, uniteOfWork)
+        public PagesController(IUniteOfWork uniteOfWork, IPageRepository pageRepository, FEEDbContext db, IHttpContextAccessor httpContextAccessor)
+            : base(pageRepository, uniteOfWork,httpContextAccessor)
         {
 
             _uniteOfWork = uniteOfWork;
 
             _pageRepository = pageRepository;
             _db = db;
+            _httpContextAccessor = httpContextAccessor;
         }
-       
+
     }
 }

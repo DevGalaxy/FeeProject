@@ -18,7 +18,7 @@ namespace Core.Entites
         public string Massage { get; set; }
         public string Goals { get; set; }
         public string HeadSpeech { get; set; }
-
+        public string Image { get; set; }
         public virtual ICollection<DepartmentReport> DepartmentReports { get; set; }
         public virtual ICollection<DepartmentLab> DepartmentLabs { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }

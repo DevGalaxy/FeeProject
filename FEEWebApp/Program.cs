@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace FEEWebApp
 {
@@ -16,12 +17,18 @@ namespace FEEWebApp
     {
         public static async Task Main(string[] args)
         {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(config)
+                .CreateLogger();
+
             var host = CreateHostBuilder(args).Build();
 
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
-            var loggerFactory = services.GetRequiredService<ILoggerProvider>();
-            var logger = loggerFactory.CreateLogger("app");
 
             try
             {
@@ -29,12 +36,10 @@ namespace FEEWebApp
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                 await Infrastructure.Seeds.DefaultRoles.SeedASync(roleManager);
                 await Infrastructure.Seeds.DefaultUsers.SeedSuperAdminUserAsync(userManager,roleManager);
-
-                logger.LogInformation("Data Seeded");
             }
             catch (Exception ex)
             {
-                logger.LogWarning(ex,"An Error Occured");
+                Log.Fatal(ex, "Failed");
             }
 
             host.Run();
@@ -42,6 +47,7 @@ namespace FEEWebApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

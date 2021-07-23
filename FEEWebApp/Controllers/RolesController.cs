@@ -1,6 +1,7 @@
 ﻿using Core.Entites;
 using Core.Enums;
 using FEEWebApp.Models;
+using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,17 +18,19 @@ namespace FEEWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdmin")]
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly FEEDbContext _db;
         public UserManager<ApplicationUser> UserManager => _userManager;
 
-        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, FEEDbContext db)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _db = db;
         }
 
         [HttpGet]
@@ -52,8 +55,8 @@ namespace FEEWebApp.Controllers
 
             return Ok();
         }
-        [HttpGet("ManagePermissions")]
-        public async Task<dynamic> ManagePermissions(string roleId)
+        [HttpGet("GetRolePermissions")]
+        public async Task<dynamic> GetRolePermissions(string roleId)
         {
             var role = await _roleManager.FindByIdAsync(roleId);
 
@@ -61,8 +64,8 @@ namespace FEEWebApp.Controllers
                 return BadRequest();
 
             var roleClaims = _roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
-            var allClaims = Permissions.GenerateAllPermissions();
-            var allPermissions = allClaims.Select(p => new CheckBoxViewModel { DisplayValue = p }).ToList();
+            var allClaims = _db.Permissions.ToList();
+            var allPermissions = allClaims.Select(p => new CheckBoxViewModel { DisplayValue = p.DispalyName }).ToList();
 
             foreach (var permission in allPermissions)
             {
@@ -97,16 +100,46 @@ namespace FEEWebApp.Controllers
 
 
                 foreach (var claim in model.UserClaims)
-                    await _roleManager.AddClaimAsync(role, new Claim("Permission", claim));
+                    await _roleManager.AddClaimAsync(role, new Claim("Permission", claim.Trim()));
 
                 return true;
             }
             catch (Exception ex)
             {
-
                 return ex.Message;
             }
             
         }
+
+        //[HttpPost("addPermissions")]
+        //public async Task<dynamic> addPermissions()
+        //{
+        //    PermissionsFormViewModel model = new PermissionsFormViewModel();
+        //    model.RoleId = _roleManager.FindByNameAsync("SuperAdmin").Result.Id;
+        //    model.UserClaims = _db.Permissions.Select(x => x.DispalyName).ToList();
+        //    try
+        //    {
+        //        var role = await _roleManager.FindByIdAsync(model.RoleId);
+
+        //        if (role == null)
+        //            return BadRequest();
+
+        //        var roleClaims = await _roleManager.GetClaimsAsync(role);
+
+        //        foreach (var claim in roleClaims)
+        //            await _roleManager.RemoveClaimAsync(role, claim);
+
+
+        //        foreach (var claim in model.UserClaims)
+        //            await _roleManager.AddClaimAsync(role, new Claim("Permission", claim.Trim()));
+
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.Message;
+        //    }
+        //}
+    
     }
 }

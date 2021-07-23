@@ -50,6 +50,7 @@ C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.Services.AppAuthentication.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.dll
@@ -68,6 +69,7 @@ C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.DependencyModel.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Hosting.Abstractions.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Identity.Core.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Logging.dll
@@ -75,6 +77,7 @@ C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Options.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Primitives.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Identity.Client.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
@@ -83,6 +86,20 @@ C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.Bson.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.AspNetCore.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Enrichers.Environment.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Enrichers.Process.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Enrichers.Thread.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Extensions.Hosting.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Extensions.Logging.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Formatting.Compact.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Settings.Configuration.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Sinks.Console.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Sinks.Debug.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Sinks.File.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Sinks.MSSqlServer.dll
+C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Serilog.Sinks.PeriodicBatching.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\badaw\source\repos\FeeProjectGit_23_\FEEWebApp\obj\Release\netcoreapp3.1\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

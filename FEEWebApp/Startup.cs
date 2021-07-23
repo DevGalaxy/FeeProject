@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Text;
 
@@ -78,19 +79,19 @@ namespace FEEWebApp
                     jwt.TokenValidationParameters = tokenValidationParameters;
                 });
 
-
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //    .AddJwtBearer();
-
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<Infrastructure.FEEDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Lockout settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
@@ -106,6 +107,8 @@ namespace FEEWebApp
 
             });
 
+            services.AddHttpContextAccessor();
+
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
@@ -120,7 +123,7 @@ namespace FEEWebApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            app.UseSerilogRequestLogging();
             app.UseCors(x => x.SetIsOriginAllowed(_ => true)
             .WithOrigins("localhost")
                     .AllowAnyMethod()
