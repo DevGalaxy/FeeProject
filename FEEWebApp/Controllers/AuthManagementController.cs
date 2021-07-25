@@ -175,6 +175,7 @@ namespace FEEWebApp.Controllers
             var claims = new List<Claim>()
                 {
                  new Claim("Id", user.Id),
+                 new Claim(ClaimTypes.NameIdentifier,user.Id),
                  new Claim(JwtRegisteredClaimNames.Email, user.Email),
                  new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -183,8 +184,14 @@ namespace FEEWebApp.Controllers
             roles.ForEach(role =>
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
+                var identityRole = _roleManager.Roles.Where(x => x.Name == role).FirstOrDefault();
+                var permissions = _roleManager.GetClaimsAsync(identityRole).Result;
+                foreach (var item in permissions)
+                {
+                    claims.Add(new Claim("Permission", item.Value));
+                }
             });
-
+           
             var claimsIdentity = new ClaimsIdentity(claims);
             var tokenDescriptor = new SecurityTokenDescriptor
             {

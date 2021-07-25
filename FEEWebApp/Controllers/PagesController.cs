@@ -1,6 +1,7 @@
 ﻿using Core.Entites;
 using Core.IRepository;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,5 +32,20 @@ namespace FEEWebApp.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        [HttpGet("GetPageByMainBarId/{id}")]
+        [AllowAnonymous]
+        public dynamic GetPageByMainBarId(int mainPageId)
+        {
+            var page = _db
+                        .Pages
+                        .Where(x => x.MainBarId == mainPageId)
+                        .ToList();
+            return page;
+        }
+        [AllowAnonymous]
+        public override dynamic Get(int id)
+        {
+            return base.Get(id);
+        }
     }
 }

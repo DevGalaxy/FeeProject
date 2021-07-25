@@ -112,6 +112,7 @@ namespace FEEWebApp.Controllers
         }
 
         //[HttpPost("addPermissions")]
+        //[AllowAnonymous]
         //public async Task<dynamic> addPermissions()
         //{
         //    PermissionsFormViewModel model = new PermissionsFormViewModel();
@@ -140,6 +141,6 @@ namespace FEEWebApp.Controllers
         //        return ex.Message;
         //    }
         //}
-    
+
     }
 }

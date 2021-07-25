@@ -9640,11 +9640,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -9666,8 +9666,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj"
+            "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj"
             }
           }
         }

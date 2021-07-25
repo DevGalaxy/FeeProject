@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj": {}
+    "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj": {
+    "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\badaw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\badaw\\Source\\Repos\\FeeProjectGit_23_\\Core\\obj\\",
+        "outputPath": "C:\\Users\\badaw\\source\\repos\\FeeProjectGit_23_\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

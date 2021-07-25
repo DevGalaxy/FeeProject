@@ -10,5 +10,6 @@ namespace Core.Entites
         public Subject Subject { get; set; }
         public int SubjectId { get; set; }
         public string UserId { get; set; }
+        public int? Degree { get; set; }
     }
 }

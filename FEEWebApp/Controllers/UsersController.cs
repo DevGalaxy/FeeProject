@@ -11,12 +11,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Infrastructure;
 using Core.Enums;
 using Microsoft.AspNetCore.Mvc.Filters;
+using FEEWebApp.Dtos;
 
 namespace FEEWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdmin")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -32,7 +33,7 @@ namespace FEEWebApp.Controllers
         }
 
         [HttpGet("GetUsers")]
-        public async Task<List<UserViewModel>> GetUSers()
+        public async Task<List<UserViewModel>> GetUsers()
         {
             var users = await _userManager.Users
                 .Select(user => new UserViewModel { Id = user.Id, UserName = user.UserName, Email = user.Email, DepartmentId = user.DepartmentId })
@@ -110,15 +111,22 @@ namespace FEEWebApp.Controllers
         #endregion
 
         [HttpGet("GetSpecifcUser/{id}")]
+        [AllowAnonymous]
         public async Task<UserViewModel> GetSpecifcUser(string id)
         {
-            var user = await _userManager.Users
-                .Select(user => new UserViewModel { Id = user.Id, UserName = user.UserName, Email = user.Email, DepartmentId = user.DepartmentId })
+            var user = await _userManager
+                .Users
+                .Include(x => x.StudentSubjects)
+                .ThenInclude(x=>x.Subject)
+                .Include(x => x.StaffSubjects)
+                .ThenInclude(x => x.Subject)
+                .Select(user => new UserViewModel { UserData = user, Id = user.Id, UserName = user.UserName, Email = user.Email, DepartmentId = user.DepartmentId })
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
             if (user != null)
             {
+
                 user.Roles = _userManager.GetRolesAsync(new ApplicationUser
                 {
                     Id = user.Id,
@@ -130,7 +138,7 @@ namespace FEEWebApp.Controllers
             return user;
         }
 
-        [HttpGet("UpdateUser")]
+        [HttpPost("UpdateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] UserRegistrationRequestDto user)
         {
             // Check if the incoming request is valid
@@ -179,7 +187,6 @@ namespace FEEWebApp.Controllers
                                         }
             });
         }
-
 
         [HttpGet("ManageRoles")]
         public async Task<dynamic> ManageRoles(string userId)
@@ -230,14 +237,101 @@ namespace FEEWebApp.Controllers
 
             return Ok();
         }
+        [HttpPost("AddStudentSubjects")]
+        public dynamic AddStudentSubjects(UserSubjectsDto obj)
+        {
+            try
+            {
+                foreach (var item in obj.Subjects)
+                {
+                    _db.StudentSubjects.Add(new StudentSubject
+                    {
+                        SubjectId = item,
+                        UserId = obj.UserId
+                    });
+                    _db.SaveChanges();
+                }
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return ex.Message;
+            }
 
+        }
+
+        [HttpPost("AddStaffSubjects")]
+        public dynamic AddStaffSubjects(UserSubjectsDto obj)
+        {
+            try
+            {
+                foreach (var item in obj.Subjects)
+                {
+                    _db.StaffSubjects.Add(new StaffSubjects
+                    {
+                        SubjectId = item,
+                        UserId = obj.UserId
+                    });
+                    _db.SaveChanges();
+                }
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return ex.Message;
+            }
+
+        }
+        [HttpPost("AddStudentSubjetDegree")]
+        public dynamic AddStudentSubjetDegree(StudentSubjectMarkDto obj)
+        {
+            var data = _db.StudentSubjects.Where(x => x.UserId == obj.UserId && x.SubjectId == obj.SubjetcId).FirstOrDefault();
+            data.Degree = obj.Mark;
+            _db.Update(data);
+            return _db.SaveChanges() > 0 ;
+        }
+        [HttpGet("GetStudentSubjects")]
+        public dynamic GetALLStudentSubjects(string userId)
+        {
+            return _db.StudentSubjects
+                .Include(x => x.Subject)
+                .Where(x => x.UserId == userId)
+                .ToList();
+        }
+
+        [HttpGet("GetCurrentStudentSubjects")]
+        public dynamic GetCurrentStudentSubjects(string userId)
+        {
+            return _db.StudentSubjects
+                .Include(x => x.Subject)
+                .Where(x => x.UserId == userId && x.Degree != null)
+                .ToList();
+        }
+       
+        [HttpGet("GetStudentSubjectsTable")]
+        public dynamic GetStudentSubjectsTable(string userId)
+        {
+            var data = _db.StudentSubjects
+                .Include(x => x.Subject)
+                .Where(x => x.UserId == userId && x.Degree != null)
+                .ToList();
+            var table = new List<StaffSubjects>();
+            data.ForEach(x =>
+            {
+               var res= _db.StaffSubjects.Include(x => x.Subject)
+                .Where(x => x.SubjectId == x.SubjectId)
+                .LastOrDefault();
+                table.Add(res);
+            });
+            return table;
+        }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 var currentAction = context.RouteData.Values["action"].ToString();
                 var currentController = context.RouteData.Values["controller"].ToString();
-                if (!HttpContext.User.Claims.Any(x => x.Type == "Permission" && x.Value == $"Permission.{currentController}.{currentAction}"))
+                if (!HttpContext.User.Claims.Any(x => x.Type == "Permission" && x.Value == $"Permissions.{currentController}.{currentAction}"))
                 {
                     context.HttpContext.Response.StatusCode = 401;
                     context.Result = Unauthorized();

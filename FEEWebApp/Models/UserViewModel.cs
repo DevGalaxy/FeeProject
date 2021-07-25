@@ -14,5 +14,7 @@ namespace FEEWebApp.Models
         public IEnumerable<string> Roles { get; set; }
         public Department Department { get; set; }
         public int? DepartmentId { get; set; }
+        public ApplicationUser UserData { get; set; }
+        
     }
 }

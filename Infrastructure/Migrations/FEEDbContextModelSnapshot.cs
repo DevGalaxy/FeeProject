@@ -513,6 +513,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Degree")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId", "SubjectId");
 
                     b.HasIndex("SubjectId");

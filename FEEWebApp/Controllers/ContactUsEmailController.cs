@@ -19,6 +19,7 @@ namespace FEEWebApp.Controllers
         }
 
         [HttpGet]
+
         public dynamic Get()
         {
             return _db.ContactUsEmail.FirstOrDefault();

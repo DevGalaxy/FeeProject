@@ -46,7 +46,7 @@ namespace FEEWebApp.Controllers
             {
                 try
                 {
-                    var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    var userId = _httpContextAccessor.HttpContext.User.Claims.Where(x => x.Type == "Id").Select(x => x.Value).FirstOrDefault();
                     entity.GetType().GetProperty("CreatedById").SetValue(entity, userId);
                 }
                 catch
@@ -98,9 +98,10 @@ namespace FEEWebApp.Controllers
             {
                 var currentAction = context.RouteData.Values["action"].ToString();
                 var currentController = context.RouteData.Values["controller"].ToString();
+                var claims = HttpContext.User.Claims.ToList();
                 if (!currentAction.Contains("Get"))
                 {
-                    if (!HttpContext.User.Claims.Any(x => x.Type == "Permission" && x.Value == $"Permission.{currentController}.{currentAction}"))
+                    if (!HttpContext.User.Claims.Any(x => x.Type == "Permission" && x.Value == $"Permissions.{currentController}.{currentAction}"))
                     {
                         context.HttpContext.Response.StatusCode = 401;
                         context.Result = Unauthorized();
